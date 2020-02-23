@@ -1,0 +1,475 @@
+@import "vars"
+@import "libs"
+@import "_mixins/breakpoints"
+
+
+html,
+body
+	overflow-x: hidden
+.preloader 
+	display: flex
+	justify-content: center
+	align-items: center
+	position: fixed
+	width: 100%
+	height: 100%
+	background-color: $bg
+	z-index: 1000
+	transition: 1s
+.preloader__content 
+	position: relative
+	width: 200px
+	height: 200px
+.preloader__first,
+.preloader__second,
+.preloader__third 
+	position: absolute
+	width: 100%
+	height: 100%
+	border-radius: 50%
+	animation: 1s linear infinite
+.preloader__first 
+	border-bottom: 3px solid #ff7473
+	animation-name: first
+.preloader__second 
+	border-right: 3px solid #ffc952
+	animation-name: second
+.preloader__third 
+	border-top: 3px solid #47b8e0
+	animation-name: third
+@keyframes first 
+	0% 
+		transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg)
+	100% 
+		transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg)
+@keyframes second 
+	0% 
+		transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg)
+	100% 
+		transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg)
+@keyframes third 
+	0% 
+		transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg)
+	100% 
+		transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg)
+body
+	font-family: $default_font
+	font-weight: normal
+	-webkit-font-smoothing: antialiased	
+	font-size: 12px
+	background: $bg url(../img/bg.jpg) no-repeat top center/cover
+	min-width: 320px
+	*
+		box-sizing: border-box
+	a
+		text-decoration: none
+		color: inherit
+		transition: all $time
+		&:hover,
+		&:focus
+			transition: all $time				
+.main_wrapper
+	padding-top: 44px	
+	padding-bottom: 60px
+	@include mds
+		padding-bottom: 118px			
+.top_logo	
+	transition: all $time
+	display: none
+	@include xs
+		display: block
+		width: 100px
+		margin-left: auto
+		margin-right: auto
+		padding-bottom: 10px		
+		@include md
+			width: 150px
+		@include lg
+			width: 200px
+	img
+		display: block
+		width: 100%
+.container
+	width: 280px
+	margin: 0 auto
+	@include xss
+		width: 335px
+	@include xs
+		width: 385px
+	@include xxss
+		width: 460px
+	@include sm
+		width: 540px
+	@include md
+		width: 730px	
+	@include mds
+		width: 800px
+	@include lg
+		width: 930px
+	@include xl
+		width: 1112px	
+.top_menu
+	margin-bottom: 15px
+	.container
+		display: flex
+		justify-content: space-between
+		align-items: center
+		padding: 11px
+		padding-left: 18px
+		background: $white
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.75)
+		transition: all $time
+nav	
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	width: 200px
+	padding: 20px
+	transform: translateX(100%)
+	transition: all $time
+	opacity: 0
+	z-index: 100
+	@include lg
+		position: relative
+		width: auto
+		height: auto
+		padding: 0
+		background: transparent
+		transform: translateX(0)
+		opacity: 1
+	ul
+		display: flex
+		flex-direction: column	
+		@include lg
+			justify-content: center
+			flex-direction: row
+		li
+			position: relative
+			@include lg
+				margin: 0 30px
+			a
+				display: inline-block
+				color: $nav_text
+				font-size: 18px
+				line-height: 33px	
+		.nav_search,
+		.top_logo
+			display: none						
+.nav_link_hover	
+	@include lg
+		&::after
+			content: ''
+			position: absolute
+			bottom: 0
+			display: block
+			width: 100%
+			height: 2px
+			background: $black
+			transform: scale(0)
+			transition: all $time
+		&:hover,
+		&:focus
+			color: $black
+			&::after
+				transform: scale(1)	
+			
+.nav_right
+	display: flex
+	justify-content: space-between
+	align-items: center
+	width: 100%
+	@include lg
+		display: block
+		width: fit-content
+	.top_logo
+		width: 100px
+		display: block
+		@include xs
+			display: none
+.nav_search
+	display: none
+	position: relative
+	width: 263px
+	height: 31px
+	transition: all $time	
+	@include xs
+		display: block
+	input
+		width: 100%
+		height: 100%
+		padding: 5px 36px 4px 16px
+		border: none
+		background: $search_bg
+		border: 1px solid $search_border
+	::-ms-clear,
+	::-ms-reveal 
+		display: none
+		width: 0
+		height: 0
+	::-webkit-search-decoration,
+	::-webkit-search-cancel-button,
+	::-webkit-search-results-button,
+	::-webkit-search-results-decoration 
+		display: none	
+	::placeholder
+		font-style: italic
+	.search_btn
+		position: absolute
+		right: 15px
+		top: 50%
+		width: 28px
+		transform: translateY(-50%)	
+		padding: 0
+		border: none
+		background: transparent
+		cursor: pointer
+		img
+			display: block
+			width: 100%
+.main_button_hide	
+	position: absolute
+	z-index: -99999
+	opacity: 0
+	visibility: hidden
+.burger	
+	transition: all $time
+	.menu_burger
+		position: relative
+		display: block
+		width: 50px
+		height: 40px
+		cursor: pointer
+		span
+			display: block
+			width: 100%
+			height: 2px			
+			background: $nav_text	
+			transform: translateY(19px)
+			&::before,
+			&::after
+				display: block
+				content: ''
+				transition: all $time
+				width: 100%
+				height: 2px
+				background: $nav_text
+			&::before
+				transform: translateY(-10px)
+			&::after
+				transform: translateY(10px)					
+	@include lg
+		display: none
+.mmenu_active
+	.top_menu
+		.container
+			padding: 0
+			height: 0
+	.top_logo
+		opacity: 0
+	nav
+		transform: translateX(0)
+		transition: all $time
+		opacity: 1
+		background: $white
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.75)
+		ul
+			height: 100%
+			align-items: center
+			justify-content: center
+			li
+				margin-right: 0
+				margin-bottom: 10px
+			.top_logo
+				display: block				
+				position: absolute
+				top: 20px
+				width: 50%
+				opacity: 1
+			.nav_search	
+				display: block
+				width: 100%		
+				.search_btn	
+					width: 20px		
+	.nav_right
+		.nav_search
+			display: none		
+	.burger
+		position: absolute
+		top: 20px
+		right: 220px
+		transition: all $time
+	.menu_burger
+		width: 35px
+		span
+			height: 0
+			&::after
+				transform: rotate(45deg)
+			&::before
+				transform: rotate(-45deg)	
+.link_hover
+	position: relative
+	z-index: 1
+	&::after
+		position: absolute
+		bottom: -6px
+		content: ''
+		display: block
+		height: 2px
+		width: 100%
+		transition: all $time
+		transform: translateX(-100%)
+	&:hover,
+	&:focus
+		&::after
+			transform: translateX(0)
+.slider
+	margin-bottom: 18px			
+	&__wrap
+		padding: 5px
+		position: relative
+		@include md
+			padding: 14px 12px
+	&__item
+		width: 100%
+	img
+		display: block
+		width: 100%
+.prev,
+.next
+	position: absolute
+	cursor: pointer
+	top: 50%
+	transform: translateY(-50%)
+	width: 25px
+	@include md
+		width: 43px
+	img
+		display: block
+		width: 100%
+.prev
+	left: 10px
+	@include md
+		left: 28px	
+.next
+	right: 10px
+	transform: translateY(-50%) rotate(180deg)
+	@include md
+		right: 28px
+.fade 
+	animation-name: fade
+	animation-duration: 2.5s
+@keyframes fade 
+	from
+		opacity: 0.1
+	to
+		opacity: 1		
+.slider__wrap,
+.info__item,
+.greeting__wrap,
+.footer__wrap
+	background: $white
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.75)	
+.info
+	&__wrap
+		display: flex
+		justify-content: space-between
+		align-items: stretch
+		flex-wrap: wrap
+		margin-bottom: 15px
+	&__item
+		padding: 12px 12px 22px 12px
+		margin-bottom: 7px
+		text-align: right
+		@include xxss
+			width: 49%
+		@include md
+			width: 24%
+			margin-bottom: 0
+	&__img
+		width: 100%
+		margin-bottom: 24px
+		img
+			display: block
+			width: 100%		
+	&__text
+		margin-bottom: 30px
+		text-align: justify
+		color: $info__text
+		text-indent: 35px
+.more
+	display: inline-block
+	margin-left: auto
+	color: $black
+	text-decoration: underline
+.greeting
+	margin-bottom: 15px
+	&__wrap
+		display: flex
+		justify-content: space-between
+		align-items: center
+		flex-direction: column-reverse
+		padding: 11px 14px 10px 11px
+		@include md
+			flex-direction: row
+	&__img_wrap
+		display: flex
+		justify-content: space-between
+		align-items: justify-content
+		flex-wrap: wrap
+		@include md
+			width: 24%
+	&__img
+		width: 49%
+		img
+			display: block
+			width: 100%
+		&:nth-child(1)
+			margin-bottom: 5px			
+	&__content
+		margin-bottom: 20px
+		text-align: right
+		@include md
+			width: 74.5%
+			margin-bottom: 0
+	&__title
+		margin-bottom: 15px
+		font-size: 18px
+		color: $black
+		text-align: left		
+	&__text
+		margin-bottom: 28px
+		color: $info__text
+		line-height: 16px
+		text-align: left
+		text-indent: 35px
+	.more
+		margin-bottom: 5px
+.footer
+	&__wrap
+		display: flex
+		flex-wrap: wrap
+		padding: 16px
+		color: $footer_text
+		font-size: 14px
+	&__item
+		display: inline-block
+		margin-right: 17px
+		overflow: hidden
+		.link_hover
+			&::after
+				background: $footer_text
+				bottom: -4px	
+	&__copyright
+		display: flex
+		width: 100%
+		margin-top: 15px
+		@include md
+			width: fit-content
+			margin-top: 0
+	a,
+	.span
+		line-height: 24px
+	.span	
+		margin-right: 3px
+
